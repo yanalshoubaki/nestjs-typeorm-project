@@ -1,45 +1,45 @@
+import { TUser } from '@/@types/entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  Unique,
-} from 'typeorm'
+} from 'typeorm';
 
 @Entity()
-export class User {
+export class User implements TUser {
   @PrimaryGeneratedColumn()
-  public id!: number
+  public id!: number;
 
   @Column({ type: 'varchar', length: 120 })
-  public name: string
+  public name: string;
 
   @Column({ type: 'varchar', length: 120, unique: true })
-  public username: string
+  public username: string;
 
   @Column({ type: 'varchar', length: 120, nullable: true })
-  public image?: string
+  public image?: string;
 
   @Column({ type: 'varchar', length: 120, unique: true })
-  public email: string
+  public email: string;
 
   @Column({ type: 'timestamp', nullable: true })
-  public lastLoginAt: Date
+  public lastLoginAt: Date;
 
   @Column({ type: 'varchar', length: 120 })
-  public password: string
+  public password: string;
 
   @Column({ type: 'boolean', default: false })
-  public isDeleted: boolean
+  public isDeleted: boolean;
 
   /*
    * Create and Update Date Columns
    */
 
   @CreateDateColumn({ type: 'timestamp' })
-  public createdAt!: Date
+  public createdAt!: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  public updatedAt!: Date
+  public updatedAt!: Date;
 }
