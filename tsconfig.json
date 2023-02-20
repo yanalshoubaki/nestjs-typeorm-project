@@ -9,7 +9,7 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
@@ -17,8 +17,12 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": { "@/*": ["./src/*"] },
     "typeRoots": ["./node_modules/@types"],
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@common/*": ["./src/common/*"],
+      "@shared/*": ["./src/shared/*"],
+      "types/*": ["./src/types/*"]
+    }
   }
 }

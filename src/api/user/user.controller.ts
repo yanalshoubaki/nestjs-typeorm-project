@@ -13,7 +13,7 @@ import {
 import { CreateUserDto } from './user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
-import { Response } from '@/@types/general';
+import { Response } from 'src/types/general';
 import { JwtAuthGuard } from './auth/auth.guard';
 
 @Controller('user')

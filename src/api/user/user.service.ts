@@ -4,8 +4,8 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './user.dto';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
-import { setResponse } from '@/common/helper/response.helper';
-import { Response } from '@/@types/general';
+import { setResponse } from '@common/helper/response.helper';
+import { Response } from 'types/general';
 
 @Injectable()
 export class UserService {

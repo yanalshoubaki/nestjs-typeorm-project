@@ -1,4 +1,4 @@
-import { Response } from '@/@types/general';
+import { Response } from 'types/general';
 
 /**
  * Function to set response object

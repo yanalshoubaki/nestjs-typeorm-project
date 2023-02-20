@@ -1,4 +1,4 @@
-import { TUser } from '@/@types/entity';
+import { TUser } from 'src/types/entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
