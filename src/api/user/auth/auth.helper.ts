@@ -9,6 +9,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/api/user/user.entity';
 import * as bcrypt from 'bcryptjs';
+import { DecodedToken } from 'types/general';
 
 @Injectable()
 export class AuthHelper {
@@ -27,8 +28,10 @@ export class AuthHelper {
   }
 
   // Get User by User ID we get from decode()
-  public async validateUser(decoded: any): Promise<User> {
-    return this.repository.findOne(decoded.id);
+  public async validateUser(decoded: DecodedToken): Promise<User> {
+    return this.repository.findOne({
+      where: { id: decoded.id, email: decoded.email },
+    });
   }
 
   // Generate JWT Token
@@ -50,7 +53,7 @@ export class AuthHelper {
 
   // Validate JWT Token, throw forbidden error if JWT Token is invalid
   private async validate(token: string): Promise<boolean | never> {
-    const decoded: unknown = this.jwt.verify(token);
+    const decoded: DecodedToken = this.jwt.verify<DecodedToken>(token);
 
     if (!decoded) {
       throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);

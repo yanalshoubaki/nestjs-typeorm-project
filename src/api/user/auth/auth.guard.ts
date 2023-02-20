@@ -6,7 +6,6 @@ import { User } from 'src/api/user/user.entity';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') implements IAuthGuard {
   public handleRequest(err: unknown, user: User): any {
-    console.log(err);
     return user;
   }
 

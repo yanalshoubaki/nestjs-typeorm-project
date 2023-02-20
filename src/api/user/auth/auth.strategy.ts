@@ -4,6 +4,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { User } from 'src/api/user/user.entity';
 import { AuthHelper } from './auth.helper';
+import { DecodedToken } from 'types/general';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -18,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  private validate(payload: string): Promise<User | never> {
+  private validate(payload: DecodedToken): Promise<User | never> {
     return this.helper.validateUser(payload);
   }
 }
