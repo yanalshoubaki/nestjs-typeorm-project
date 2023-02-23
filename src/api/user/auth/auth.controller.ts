@@ -13,6 +13,7 @@ import { RegisterDto, LoginDto } from './auth.dto';
 import { JwtAuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { Request } from 'express';
+import { Response } from 'types/general';
 
 @Controller('auth')
 export class AuthController {
@@ -21,15 +22,17 @@ export class AuthController {
 
   @Post('register')
   @UseInterceptors(ClassSerializerInterceptor)
-  private register(@Body() body: RegisterDto): Promise<User | never> {
+  private register(@Body() body: RegisterDto): Promise<Response<User>> {
     return this.service.register(body);
   }
 
   @Post('login')
-  private login(@Body() body: LoginDto): Promise<{
-    token: string;
-    user: User;
-  }> {
+  private login(@Body() body: LoginDto): Promise<
+    Response<{
+      token: string;
+      user: User;
+    }>
+  > {
     return this.service.login(body);
   }
 

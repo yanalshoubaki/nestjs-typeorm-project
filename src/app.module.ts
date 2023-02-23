@@ -7,13 +7,13 @@ import { ApiModule } from 'src/api/api.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
+const envFilePath: string = getEnvPath(`dist/common/envs`);
 
 @Module({
   imports: [
-    ApiModule,
     ConfigModule.forRoot({ envFilePath, isGlobal: true }),
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+    ApiModule,
   ],
   controllers: [AppController],
   providers: [AppService],

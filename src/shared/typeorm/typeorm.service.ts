@@ -7,8 +7,8 @@ import { User } from 'src/api/user/user.entity';
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   @Inject(ConfigService)
   private readonly config: ConfigService;
-
   public createTypeOrmOptions(): TypeOrmModuleOptions {
+    console.log(this.config);
     return {
       type: 'mysql',
       host: this.config.get<string>('DATABASE_HOST'),

@@ -6,9 +6,10 @@ import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
 import { setResponse } from '@common/helper/response.helper';
 import { Response } from 'types/general';
+import { UserInterface } from './user.interface';
 
 @Injectable()
-export class UserService {
+export class UserService implements UserInterface {
   @InjectRepository(User)
   private readonly repository: Repository<User>;
 
@@ -98,7 +99,7 @@ export class UserService {
     }
   }
 
-  public async deleteUser(id: number): Promise<Response<User>> {
+  public async deleteUser(id: number): Promise<Response> {
     try {
       const user: User = await this.repository.findOne({
         where: {
@@ -106,12 +107,12 @@ export class UserService {
         },
       });
       if (!user) {
-        return setResponse<User>(HttpStatus.NOT_FOUND, 'User not found');
+        return setResponse(HttpStatus.NOT_FOUND, 'User not found');
       }
       await this.repository.delete(id);
-      return setResponse<User>(HttpStatus.OK, 'User deleted successfully');
+      return setResponse(HttpStatus.OK, 'User deleted successfully');
     } catch (error) {
-      return setResponse<User>(HttpStatus.BAD_REQUEST, error.message);
+      return setResponse(HttpStatus.BAD_REQUEST, error.message);
     }
   }
 }

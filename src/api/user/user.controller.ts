@@ -18,12 +18,13 @@ import { User } from './user.entity';
 import { UserService } from './user.service';
 import { Response } from 'src/types/general';
 import { JwtAuthGuard } from './auth/auth.guard';
+import { UserInterface } from './user.interface';
 
 @Controller('user')
 @Injectable({ scope: Scope.REQUEST })
 export class UserController {
   @Inject(UserService)
-  private readonly service: UserService;
+  private readonly service: UserInterface;
 
   @Get('/')
   public getUsers(): Promise<Response<User[]>> {
@@ -58,7 +59,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  public deleteUser(@Param('id') id: number): Promise<Response<User>> {
+  public deleteUser(@Param('id') id: number): Promise<Response> {
     return this.service.deleteUser(id);
   }
 }
